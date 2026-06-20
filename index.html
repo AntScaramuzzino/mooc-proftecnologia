@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProfTecnologIA — I MOOC di Antonio Scaramuzzino</title>
+<style>
+  :root{
+    --primary:#4338CA;        /* indigo */
+    --accent:#6B4FE0;         /* viola */
+    --ink:#1f2937;
+    --muted:#6b7280;
+    --line:#e5e7eb;
+    --bg:#f7f7fb;
+    --card:#ffffff;
+    --radius:16px;
+    --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  a{color:inherit;text-decoration:none}
+
+  /* Topbar */
+  header.top{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+  .top-inner{max-width:1160px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:16px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
+  .brand .logo{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--primary),var(--accent));display:grid;place-items:center;color:#fff;font-size:18px}
+  .top-inner nav{margin-left:auto;display:flex;gap:22px;font-size:14px;color:var(--muted);font-weight:500}
+  .top-inner nav a:hover{color:var(--ink)}
+
+  /* Hero */
+  .hero{background:linear-gradient(135deg,#3730A3 0%,#6B4FE0 100%);color:#fff}
+  .hero-inner{max-width:1160px;margin:0 auto;padding:56px 24px 64px}
+  .hero .eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.85;font-weight:600}
+  .hero h1{font-size:38px;line-height:1.15;margin:12px 0 10px;max-width:780px;font-weight:800}
+  .hero p{font-size:17px;opacity:.92;max-width:620px;margin:0 0 26px}
+  .search{display:flex;background:#fff;border-radius:12px;overflow:hidden;max-width:560px;box-shadow:var(--shadow)}
+  .search input{flex:1;border:0;padding:15px 18px;font-size:15px;color:var(--ink);outline:none}
+  .search button{border:0;background:var(--primary);color:#fff;padding:0 22px;font-weight:600;font-size:15px;cursor:pointer}
+  .stats{display:flex;gap:34px;margin-top:30px;flex-wrap:wrap}
+  .stats .s{font-size:13px;opacity:.9}
+  .stats .s b{display:block;font-size:24px;font-weight:800}
+
+  /* Catalogo */
+  .wrap{max-width:1160px;margin:0 auto;padding:38px 24px 70px}
+  .catalog-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+  .catalog-head h2{font-size:24px;margin:0;font-weight:800}
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{border:1px solid var(--line);background:#fff;color:var(--muted);padding:7px 14px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+  .chip:hover{border-color:var(--accent);color:var(--accent)}
+  .chip.active{background:var(--primary);border-color:var(--primary);color:#fff}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;margin-top:22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(16,24,40,.12)}
+  .cover{height:130px;display:grid;place-items:center;font-size:46px;color:#fff;position:relative}
+  .cover .badge{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.92);color:var(--ink);font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;letter-spacing:.03em}
+  .cover .badge.soon{background:rgba(17,24,39,.78);color:#fff}
+  .card-body{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+  .area{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.04em}
+  .card h3{font-size:16.5px;margin:6px 0 8px;line-height:1.3}
+  .card .desc{font-size:13.5px;color:var(--muted);flex:1;margin:0 0 14px}
+  .meta{display:flex;gap:14px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+  .meta span{display:flex;align-items:center;gap:5px}
+  .cta{margin-top:14px}
+  .cta a{display:block;text-align:center;padding:11px;border-radius:10px;font-weight:700;font-size:14px}
+  .cta a.go{background:var(--primary);color:#fff}
+  .cta a.go:hover{background:#3730A3}
+  .cta a.soon{background:#f1f1f6;color:var(--muted);cursor:default}
+  .empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:50px 0}
+
+  footer{border-top:1px solid var(--line);background:#fff}
+  .foot-inner{max-width:1160px;margin:0 auto;padding:26px 24px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  @media(max-width:600px){.hero h1{font-size:29px}.hero-inner{padding:40px 20px 48px}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand"><span class="logo">🎓</span> <span id="brandName">ProfTecnologIA</span></div>
+    <nav>
+      <a href="#catalogo">Catalogo</a>
+      <a href="#">Chi siamo</a>
+      <a href="#">Attestati</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow" id="heroEyebrow">ProfTecnologIA · Antonio Scaramuzzino · 2026</div>
+    <h1 id="heroTitle">I MOOC di Antonio Scaramuzzino</h1>
+    <p id="heroTagline">Corsi online aperti, self-paced e accessibili da qualsiasi dispositivo. Studia quando vuoi, al tuo ritmo.</p>
+    <div class="search">
+      <input id="q" type="text" placeholder="Cerca un corso, un argomento, un autore…" aria-label="Cerca">
+      <button onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})">Esplora</button>
+    </div>
+    <div class="stats">
+      <div class="s"><b id="stCorsi">—</b> corsi</div>
+      <div class="s"><b id="stOre">—</b> ore di studio</div>
+      <div class="s"><b id="stAree">—</b> aree tematiche</div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" id="catalogo">
+  <div class="catalog-head">
+    <h2>Catalogo corsi</h2>
+    <div class="filters" id="filters"></div>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <span>© 2026 ProfTecnologIA · Antonio Scaramuzzino · Contenuti a uso didattico citando la fonte</span>
+    <span>Piattaforma statica · powered by mooc-builder</span>
+  </div>
+</footer>
+
+<script>
+// Fallback dei dati: usato quando la pagina è aperta da file:// e fetch() è bloccato.
+const FALLBACK = {"piattaforma":{"nome":"ProfTecnologIA","titolare":"Antonio Scaramuzzino","tagline":"I MOOC di Antonio Scaramuzzino per la formazione dei docenti.","anno":2026},"corsi":[{"id":"ia-inclusiva","titolo":"L'IA come co-pilota nella progettazione della didattica inclusiva","sottotitolo":"Usare l'intelligenza artificiale generativa per progettare lezioni accessibili a tutti","descrizione":"Cinque moduli self-paced su IA generativa, framework didattici, laboratorio di strumenti, progettazione e valutazione inclusiva. Con dispense, podcast, slide, quiz e flashcard.","autore":"prof. Antonio Scaramuzzino","durata_ore":6,"moduli":5,"livello":"Base","lingua":"it","area":"Didattica inclusiva","tag":["IA generativa","Inclusione","UDL","BES"],"colore":"#6B4FE0","icona":"🤖","stato":"pubblicato","url":"https://mooc-ia-inclusiva.vercel.app/"},{"id":"alfabetizzazione-ia","titolo":"Alfabetizzazione IA","sottotitolo":"Muovi i primi passi con l'Intelligenza Artificiale","descrizione":"Percorso self-paced di alfabetizzazione all'IA per il personale scolastico (docenti, dirigenti, ATA, DSGA). Nessuna conoscenza pregressa: 4 micromoduli su cos'è l'IA, le regole a scuola, gli strumenti pratici, etica e pensiero critico.","autore":"Antonio Scaramuzzino","durata_ore":2,"moduli":4,"livello":"Base","lingua":"it","area":"Competenze digitali","tag":["Alfabetizzazione IA","DigComp 3.0","Personale scolastico","Etica"],"colore":"#2563EB","icona":"🧭","stato":"pubblicato","url":"https://mooc-alfabetizzazione-ia.vercel.app/"},{"id":"valutazione-formativa","titolo":"Valutazione formativa e feedback efficace","sottotitolo":"Strumenti e pratiche per una valutazione che fa crescere","descrizione":"Dalla rubrica al feedback descrittivo: progettare prove autentiche e restituzioni che orientano l'apprendimento invece di limitarsi a misurarlo.","autore":"Rete di scuole","durata_ore":5,"moduli":4,"livello":"Intermedio","lingua":"it","area":"Valutazione","tag":["Valutazione","Feedback","Rubriche"],"colore":"#0EA5A4","icona":"📊","stato":"in-arrivo","url":"#"},{"id":"competenze-digitali","titolo":"Competenze digitali per la classe","sottotitolo":"Il quadro DigCompEdu applicato alla pratica quotidiana","descrizione":"Un percorso pratico per riconoscere e potenziare le proprie competenze digitali professionali secondo il framework europeo DigCompEdu.","autore":"Rete di scuole","durata_ore":8,"moduli":6,"livello":"Base","lingua":"it","area":"Competenze digitali","tag":["DigCompEdu","Digitale","Cittadinanza"],"colore":"#D97706","icona":"💡","stato":"in-arrivo","url":"#"},{"id":"coding-pensiero-computazionale","titolo":"Coding e pensiero computazionale alla primaria","sottotitolo":"Attività unplugged e digitali per i più piccoli","descrizione":"Introdurre logica, sequenze e problem solving senza tecnicismi, con percorsi pronti all'uso per la scuola primaria.","autore":"Rete di scuole","durata_ore":6,"moduli":5,"livello":"Base","lingua":"it","area":"Competenze digitali","tag":["Coding","Pensiero computazionale","Primaria"],"colore":"#C81F1F","icona":"🧩","stato":"in-arrivo","url":"#"}]};
+
+let DATA = FALLBACK, areaFiltro = "Tutte", queryStr = "";
+
+function init(d){
+  DATA = d;
+  const p = d.piattaforma||{};
+  if(p.nome) document.getElementById('brandName').textContent = p.nome.split('—')[0].trim();
+  if(p.tagline) document.getElementById('heroTagline').textContent = p.tagline + " Studia quando vuoi, al tuo ritmo, da qualsiasi dispositivo.";
+  const corsi = d.corsi||[];
+  const aree = [...new Set(corsi.map(c=>c.area))];
+  document.getElementById('stCorsi').textContent = corsi.length;
+  document.getElementById('stOre').textContent = corsi.reduce((a,c)=>a+(c.durata_ore||0),0)+"+";
+  document.getElementById('stAree').textContent = aree.length;
+  // filtri
+  const fb = document.getElementById('filters');
+  fb.innerHTML="";
+  ["Tutte",...aree].forEach(a=>{
+    const b=document.createElement('button');
+    b.className="chip"+(a===areaFiltro?" active":"");
+    b.textContent=a; b.onclick=()=>{areaFiltro=a;render();};
+    fb.appendChild(b);
+  });
+  render();
+}
+
+function render(){
+  document.querySelectorAll('#filters .chip').forEach(c=>c.classList.toggle('active',c.textContent===areaFiltro));
+  const grid = document.getElementById('grid');
+  const q = queryStr.toLowerCase();
+  const list = (DATA.corsi||[]).filter(c=>{
+    const okArea = areaFiltro==="Tutte" || c.area===areaFiltro;
+    const hay = (c.titolo+" "+c.sottotitolo+" "+c.descrizione+" "+c.autore+" "+(c.tag||[]).join(" ")).toLowerCase();
+    return okArea && (q==="" || hay.includes(q));
+  });
+  if(!list.length){grid.innerHTML='<div class="empty">Nessun corso trovato. Prova a cambiare ricerca o filtro.</div>';return;}
+  grid.innerHTML = list.map(c=>{
+    const soon = c.stato!=="pubblicato";
+    const col = c.colore||"#4338CA";
+    return `<div class="card">
+      <div class="cover" style="background:linear-gradient(135deg,${col},${shade(col,-22)})">
+        <span class="badge ${soon?'soon':''}">${soon?'In arrivo':'Disponibile'}</span>
+        ${c.icona||'📘'}
+      </div>
+      <div class="card-body">
+        <div class="area">${c.area||''}</div>
+        <h3>${c.titolo}</h3>
+        <p class="desc">${c.descrizione||c.sottotitolo||''}</p>
+        <div class="meta">
+          <span>⏱ ${c.durata_ore} h</span>
+          <span>📚 ${c.moduli} moduli</span>
+          <span>🎯 ${c.livello}</span>
+        </div>
+        <div class="cta">
+          ${soon
+            ? '<a class="soon">Disponibile a breve</a>'
+            : `<a class="go" href="${c.url}" target="_blank" rel="noopener">Vai al corso →</a>`}
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function shade(hex,p){ // schiarisce/scurisce un colore hex
+  const n=parseInt(hex.replace('#',''),16);
+  let r=(n>>16)+p, g=((n>>8)&255)+p, b=(n&255)+p;
+  r=Math.max(0,Math.min(255,r));g=Math.max(0,Math.min(255,g));b=Math.max(0,Math.min(255,b));
+  return '#'+(0x1000000+r*0x10000+g*0x100+b).toString(16).slice(1);
+}
+
+document.getElementById('q').addEventListener('input',e=>{queryStr=e.target.value;render();});
+
+// Carica il registro esterno; se bloccato (file://) usa il fallback embedded.
+fetch('corsi.json').then(r=>r.json()).then(init).catch(()=>init(FALLBACK));
+</script>
+</body>
+</html>
